@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class EioDatabaseHandler {
 
-	//PropertyReader settings = new PropertyReader();
-	final String JDBC_Driver = "com.mysql.jdbc.Driver";//settings.readFromProperties("JDBC_Driver");
-	final String DB_URL = "jdbc:mysql://ems.informatik.uni-oldenburg.de:55000/it15g03";//settings.readFromProperties("DB_URL");
-	final String user = "it15g03";//settings.readFromProperties("user");
-	final String pw = "ivolk0t";//settings.readFromProperties("pw");
+	PropertyReader settings = new PropertyReader();
+	final String JDBC_Driver = settings.readFromProperties("JDBC_Driver");
+	final String DB_URL = settings.readFromProperties("DB_URL");
+	final String user = settings.readFromProperties("user");
+	final String pw = settings.readFromProperties("pw");
 
 	public static final int TIMEOUT_MS = 5000;
 
