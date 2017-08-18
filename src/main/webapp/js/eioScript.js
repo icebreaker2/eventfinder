@@ -531,7 +531,7 @@ $(function () {
 		categoryCache = category; //refresh cache
 
 		$.ajax({
-			url: "/api/search",
+			url: "/eventfinder-1.0/api/search",
 			type: 'POST',
 			dataType: 'json',
 			data: {
@@ -591,19 +591,19 @@ $(function () {
 
 			//Colour for event markers
 			if (data.isToday) {
-				var markerIcon = '/Images/marker-today.png';
+				var markerIcon = '/eventfinder-1.0/Images/marker-today.png';
 			} else if (data.isTomorrow) {
-				var markerIcon = '/Images/marker-tomorrow.png';
+				var markerIcon = '/eventfinder-1.0/Images/marker-tomorrow.png';
 			} else if (data.isInNextThreeDays) {
-				var markerIcon = '/Images/marker-three-days.png';
+				var markerIcon = '/eventfinder-1.0/Images/marker-three-days.png';
 			} else if (data.isNextWeek) {
-				var markerIcon = '/Images/marker-next-week.png';
+				var markerIcon = '/eventfinder-1.0/Images/marker-next-week.png';
 			} else {
-				var markerIcon = '/Images/marker-far-away.png';
+				var markerIcon = '/eventfinder-1.0/Images/marker-far-away.png';
 			}
 
 			var infoBlock =
-				'<a class="sideButton showDirection" href="#"><img src="/Images/route.png" alt="directions"> Route</a>' +
+				'<a class="sideButton showDirection" href="#"><img src="/eventfinder-1.0/Images/route.png" alt="directions"> Route</a>' +
 				'<div class="openMarker">' +
 				'<img class="marker" src="' + markerIcon + '">' +
 				'<h4>' + data.date + '</h4>' +

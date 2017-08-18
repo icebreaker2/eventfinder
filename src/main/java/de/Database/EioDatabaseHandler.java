@@ -10,8 +10,8 @@ public class EioDatabaseHandler {
 	PropertyReader settings = new PropertyReader();
 	final String JDBC_Driver = settings.readFromProperties("JDBC_Driver");
 	final String DB_URL = settings.readFromProperties("DB_URL");
-	final String user = settings.readFromProperties("user");
-	final String pw = settings.readFromProperties("pw");
+	final String user = "root";
+	final String pw = " ";
 
 	public static final int TIMEOUT_MS = 5000;
 
@@ -56,29 +56,32 @@ public class EioDatabaseHandler {
 			prep = connection.prepareStatement(query);
 
 			// System.out.println(prep.toString());
-
 			//execute query (prep)
-			results = prep.executeQuery();
-
-			//Iterate through ResultSet
-			while (results.next()) {
-				Event partialEvent = new Event();
-				partialEvent.setDate(results.getString("date"));
-				partialEvent.setDescription(results.getString("description"));
-				partialEvent.setTitle(results.getString("title"));
-				partialEvent.setLocation(results.getString("location"));
-				partialEvent.setLatPoint(results.getDouble("latPoint"));
-				partialEvent.setLngPoint(results.getDouble("lngPoint"));
-				partialEvent.setInfoUrl(results.getString("infoUrl"));
-				partialEvent.setShares(results.getInt("shares"));
-				fetchResults.add(partialEvent);
+			boolean hasMoreResultSets  = prep.execute();
+			if (hasMoreResultSets) {
+				results = prep.getResultSet();
+				//Iterate through ResultSet
+				while (results.next()) {
+					Event partialEvent = new Event();
+					partialEvent.setDate(results.getString("date"));
+					partialEvent.setDescription(results.getString("description"));
+					partialEvent.setTitle(results.getString("title"));
+					partialEvent.setLocation(results.getString("location"));
+					partialEvent.setLatPoint(results.getDouble("latPoint"));
+					partialEvent.setLngPoint(results.getDouble("lngPoint"));
+					partialEvent.setInfoUrl(results.getString("infoUrl"));
+					partialEvent.setShares(results.getInt("shares"));
+					fetchResults.add(partialEvent);
+				}
 			}
+
+
 
 			closeQueryConnection();
 
 		} catch (java.sql.SQLException sql_e) {
-			// System.err.println("SQLException: ");
-			// System.err.println(sql_e.getMessage());
+			 System.err.println("SQLException: ");
+			 System.err.println(sql_e.getMessage());
 		}
 
 		return fetchResults;

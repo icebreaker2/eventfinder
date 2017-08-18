@@ -40,6 +40,8 @@ public class SqlQueryBuilder {
             }
 		}
 		query = query.replace(") (", ") AND (");
+		System.out.println(query + " ORDER BY " + SQL_Table + ".date ASC");
+
 		return query + " ORDER BY " + SQL_Table + ".date ASC";
 	}
 
