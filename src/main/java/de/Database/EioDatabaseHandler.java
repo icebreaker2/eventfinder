@@ -43,7 +43,7 @@ public class EioDatabaseHandler {
 		return true;
 	}
 
-	public ArrayList<Event> fetchSearchResults(String query) {
+	public ArrayList<Event> fetchSearchResults(String query, String [] searchTags) {
 
 		ArrayList<Event> fetchResults = new ArrayList<Event>();
 
@@ -54,6 +54,17 @@ public class EioDatabaseHandler {
 			}
 			// prepare statement and prevent injection
 			prep = connection.prepareStatement(query);
+			for (String tag : searchTags) {
+				if (!tag.equals("")) {
+					if (tag.contains("'")) { // check for tick mark
+						tag = tag.replace("'", "\''");
+					}
+					prep.setString(1, tag);
+					prep.setString(2, tag);
+					prep.setString(3, tag);
+					prep.setString(4, tag);
+				}
+			}
 
 			// System.out.println(prep.toString());
 			//execute query (prep)

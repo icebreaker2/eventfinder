@@ -58,7 +58,7 @@ public class DatabasePreparer {
 
             openDatabase();
             // request to the server
-            return database.fetchSearchResults(SqlQueryBuilder.buildSearchQuery(searchTagList, dateRevert));
+            return database.fetchSearchResults(SqlQueryBuilder.buildSearchQuery(searchTagList, dateRevert), searchTags);
         }
         // else
         return null;
@@ -120,7 +120,7 @@ public class DatabasePreparer {
             openDatabase();
         }
         // first check which events already exists
-        ArrayList<Event> existingEvents = database.fetchSearchResults(SqlQueryBuilder.buildSearchQuery(new ArrayList<String>(), ""));
+        ArrayList<Event> existingEvents = database.fetchSearchResults(SqlQueryBuilder.buildSearchQuery(new ArrayList<String>(), ""), new String[]{});
         for (Event existing : existingEvents) {
             for (Event event : events) {
                 if (existing.getDate().equals(event.getDate())) { // skip

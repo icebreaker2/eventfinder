@@ -24,7 +24,7 @@ public class SqlQueryBuilder {
 			if (tag.contains("'")) { // check for tick mark
 				tag = tag.replace("'", "\''");
 			}
-			query = query + " (" + SQL_Table + ".title LIKE '%" + tag + "%' OR " + SQL_Table + ".location LIKE '%" + tag + "%' OR " + SQL_Table + ".description LIKE '%" + tag + "%' OR " + SQL_Table + ".tags LIKE '%" + tag + "%')";
+			query = query + " (" + SQL_Table + ".title LIKE '%' ? '%' OR " + SQL_Table + ".location LIKE '' ? '' OR " + SQL_Table + ".description LIKE '' ? '' OR " + SQL_Table + ".tags LIKE '' ? '')";
 		}
 		if (!date.equals("")) {
             if (!date.contains("/")){
