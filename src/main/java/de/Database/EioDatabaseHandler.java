@@ -10,8 +10,8 @@ public class EioDatabaseHandler {
 	PropertyReader settings = new PropertyReader();
 	final String JDBC_Driver = settings.readFromProperties("JDBC_Driver");
 	final String DB_URL = settings.readFromProperties("DB_URL");
-	final String user = "root";
-	final String pw = " ";
+	final String user = settings.readFromProperties("user");
+	final String pw = settings.readFromProperties("pw");
 
 	public static final int TIMEOUT_MS = 5000;
 
